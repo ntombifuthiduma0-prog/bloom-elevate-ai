@@ -47,31 +47,27 @@ const ShimmerComponent = ({
     [children, spread]
   );
 
-  return (
-    <MotionComponent
-      animate={{ backgroundPosition: "0% center" }}
-      className={cn(
-        "relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent",
-        "[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-background),#0000_calc(50%+var(--spread)))] [background-repeat:no-repeat,padding-box]",
-        className
-      )}
-      initial={{ backgroundPosition: "100% center" }}
-      style={
-        {
-          "--spread": `${dynamicSpread}px`,
-          backgroundImage:
-            "var(--bg), linear-gradient(var(--color-muted-foreground), var(--color-muted-foreground))",
-        } as unknown as NonNullable<MotionProps["style"]>
-      }
-      transition={{
-        duration,
-        ease: "linear",
-        repeat: Number.POSITIVE_INFINITY,
-      }}
-    >
-      {children}
-    </MotionComponent>
-  );
+  const motionProps = {
+    animate: { backgroundPosition: "0% center" },
+    className: cn(
+      "relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent",
+      "[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-background),#0000_calc(50%+var(--spread)))] [background-repeat:no-repeat,padding-box]",
+      className
+    ),
+    initial: { backgroundPosition: "100% center" },
+    style: {
+      "--spread": `${dynamicSpread}px`,
+      backgroundImage:
+        "var(--bg), linear-gradient(var(--color-muted-foreground), var(--color-muted-foreground))",
+    },
+    transition: {
+      duration,
+      ease: "linear",
+      repeat: Number.POSITIVE_INFINITY,
+    },
+  } as unknown as MotionHTMLProps;
+
+  return <MotionComponent {...motionProps}>{children}</MotionComponent>;
 };
 
 export const Shimmer = memo(ShimmerComponent);
