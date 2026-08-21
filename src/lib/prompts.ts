@@ -77,10 +77,10 @@ ${RESPONSIBLE_AI_RULES}`;
 
 export function buildEmailPrompt(input: {
   purpose: string;
-  clientName?: string;
-  situation?: string;
-  details?: string;
-  outcome?: string;
+  clientName?: string | undefined;
+  situation?: string | undefined;
+  details?: string | undefined;
+  outcome?: string | undefined;
   tone: string;
 }) {
   return [

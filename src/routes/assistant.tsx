@@ -6,11 +6,14 @@ import { AppShell } from "@/components/layout/AppShell";
 import { Shimmer } from "@/components/ai-elements/shimmer";
 import { logActivity } from "@/lib/activity";
 
-type AssistantSearch = { q?: string };
+type AssistantSearch = { q: string | undefined };
 
 export const Route = createFileRoute("/assistant")({
   validateSearch: (search: Record<string, unknown>): AssistantSearch => ({
-    q: typeof search.q === "string" && search.q.trim() ? search.q.trim() : undefined,
+    q:
+      typeof search["q"] === "string" && (search["q"] as string).trim()
+        ? (search["q"] as string).trim()
+        : undefined,
   }),
   head: () => ({
     meta: [

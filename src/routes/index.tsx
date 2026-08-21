@@ -100,7 +100,7 @@ function Dashboard() {
               e.preventDefault();
               navigate({
                 to: "/assistant",
-                search: ask.trim() ? { q: ask.trim() } : undefined,
+                search: { q: ask.trim() || undefined },
               });
             }}
           >
