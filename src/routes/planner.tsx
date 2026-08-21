@@ -23,7 +23,7 @@ export const Route = createFileRoute("/planner")({
       },
     ],
   }),
-  component: Planner;
+  component: Planner,
 });
 
 type Task = {
